@@ -753,12 +753,27 @@ export function InternshipSection() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white p-8 md:p-16 relative overflow-hidden border border-white/5">
             <div className="relative z-10">
-              <div className="mb-16">
+              <div className="mb-10">
                  <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-600 mb-6">
                     Application Process
                  </div>
                  <h2 className="text-4xl font-display font-medium text-slate-900 mb-4 tracking-tight">Initiate Registration</h2>
-                 <p className="text-slate-500 font-light">Enter the high-performance cohort. Limited slots available.</p>
+                 <p className="text-slate-500 font-light mb-6">Enter the high-performance cohort. Limited slots available.</p>
+                 
+                 {/* Urgent Deadline Notification Banner */}
+                 <div className="p-5 bg-amber-50/80 border border-amber-200 text-amber-950 text-xs md:text-sm flex gap-4 rounded-sm items-start md:items-center shadow-xs">
+                   <div className="relative flex-shrink-0 mt-1 md:mt-0">
+                     <Calendar className="w-5 h-5 text-amber-600 animate-pulse" />
+                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
+                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
+                   </div>
+                   <div className="leading-relaxed">
+                     <span className="font-extrabold text-amber-950 uppercase tracking-wider text-[10px] bg-amber-200/50 px-2 py-0.5 rounded-sm mr-2 block sm:inline-block w-fit mb-1 sm:mb-0">
+                       Important Notice
+                     </span>
+                     The <strong className="font-black text-red-600 underline">10th of this month</strong> is the absolute last date to apply/submit for major & minor projects for this academic cycle. Complete registration below immediately to lock your slot!
+                   </div>
+                 </div>
               </div>
 
               {formStatus === "success" ? (
