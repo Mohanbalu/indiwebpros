@@ -20,7 +20,8 @@ import {
   ShieldCheck,
   Zap,
   TrendingUp,
-  Briefcase
+  Briefcase,
+  Lock
 } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import { Logo } from "./ui/Logo";
@@ -751,239 +752,38 @@ export function InternshipSection() {
       {/* SECTION 11 — APPLICATION FORM */}
       <section id="apply" className="py-32 bg-[#0A0A0B]">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-white p-8 md:p-16 relative overflow-hidden border border-white/5">
+          <div className="bg-white p-8 md:p-16 relative overflow-hidden border border-white/5 animate-fade-in">
             <div className="relative z-10">
               <div className="mb-10">
-                 <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-600 mb-6">
-                    Application Process
+                 <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#E11D48] mb-6">
+                    Registration Closed
                  </div>
-                 <h2 className="text-4xl font-display font-medium text-slate-900 mb-4 tracking-tight">Initiate Registration</h2>
-                 <p className="text-slate-500 font-light mb-6">Enter the high-performance cohort. Limited slots available.</p>
+                 <h2 className="text-4xl font-display font-medium text-slate-900 mb-4 tracking-tight">Applications Closed</h2>
+                 <p className="text-slate-500 font-light mb-6">Thank you for your overwhelming interest. Registrations for the current academic cycle have been security locked.</p>
                  
-                 {/* Urgent Deadline Notification Banner */}
-                 <div className="p-5 bg-amber-50/80 border border-amber-200 text-amber-950 text-xs md:text-sm flex gap-4 rounded-sm items-start md:items-center shadow-xs">
+                 {/* Closed Notice Banner */}
+                 <div className="p-5 bg-rose-50/80 border border-rose-200 text-rose-950 text-xs md:text-sm flex gap-4 rounded-sm items-start md:items-center shadow-xs">
                    <div className="relative flex-shrink-0 mt-1 md:mt-0">
-                     <Calendar className="w-5 h-5 text-amber-600 animate-pulse" />
-                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
-                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
+                     <Lock className="w-5 h-5 text-rose-600 animate-pulse" />
                    </div>
                    <div className="leading-relaxed">
-                     <span className="font-extrabold text-amber-950 uppercase tracking-wider text-[10px] bg-amber-200/50 px-2 py-0.5 rounded-sm mr-2 block sm:inline-block w-fit mb-1 sm:mb-0">
-                       Important Notice
+                     <span className="font-extrabold text-rose-950 uppercase tracking-wider text-[10px] bg-rose-200/50 px-2 py-0.5 rounded-sm mr-2 block sm:inline-block w-fit mb-1 sm:mb-0">
+                       Notice
                      </span>
-                     The <strong className="font-black text-red-600 underline">10th of this month</strong> is the absolute last date to apply/submit for major & minor projects for this academic cycle. Complete registration below immediately to lock your slot!
+                     The application window for final year B.Tech major & minor projects for this cohort closed on the <strong className="font-black text-rose-700 underline">10th of this month</strong>. Please wait for our next cohort announcement.
                    </div>
                  </div>
               </div>
 
-              {formStatus === "success" ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-slate-50 p-12 text-center border border-slate-100"
-                >
-                  <div className="w-16 h-16 bg-emerald-500 text-white flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-emerald-500/20">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-display font-medium text-slate-900 mb-4 tracking-tight">System Validated</h3>
-                  <p className="text-slate-500 font-light leading-relaxed max-w-md mx-auto">
-                    Your application has been logged. Our technical team will review your profile shortly.
-                  </p>
-
-                  <button 
-                    onClick={() => {
-                      setFormStatus("idle");
-                      setCurrentStep(1);
-                      setFormData({
-                        fullName: "",
-                        email: "",
-                        phone: "",
-                        whatsapp: "",
-                        college: "",
-                        degree: "",
-                        year: "1st Year",
-                        domain: "",
-                        skills: "",
-                        reason: "",
-                        referralCode: "NA"
-                      });
-                    }}
-                    className="mt-10 px-8 py-4 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-all"
-                  >
-                    New Entry
-                  </button>
-                </motion.div>
-              ) : formStatus === "error" ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-rose-50 p-12 text-center border border-rose-100"
-                >
-                  <h3 className="text-xl font-display font-medium text-slate-900 mb-2 tracking-tight">Transmission Failed</h3>
-                  <p className="text-rose-600 text-sm font-light mb-8 max-w-sm mx-auto">
-                    {errorMessage}
-                  </p>
-                  <button 
-                    onClick={() => setFormStatus("idle")}
-                    className="mt-2 px-8 py-4 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest"
-                  >
-                    Retry
-                  </button>
-                </motion.div>
-              ) : (
-                <div className="space-y-12">
-                  <div className="w-full h-1 bg-slate-100 overflow-hidden">
-                     <motion.div 
-                       className="h-full bg-indigo-600"
-                       initial={{ width: 0 }}
-                       animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
-                     />
-                  </div>
-
-                  <form onSubmit={handleSubmit} className="space-y-10">
-                    <AnimatePresence mode="wait">
-                      {currentStep === 1 && (
-                        <motion.div
-                          key="step1"
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="space-y-8"
-                        >
-                          <div className="space-y-6">
-                            <h4 className="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-widest">
-                              01. Track Selection
-                            </h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-100 border border-slate-100">
-                               <label className={cn(
-                                 "relative flex items-center p-8 transition-all cursor-pointer bg-white group",
-                                 formData.domain === "Full Stack Development" ? "bg-slate-50 shadow-inner" : "hover:bg-slate-50"
-                               )}>
-                                 <input type="radio" name="domain" value="Full Stack Development" className="sr-only" required checked={formData.domain === "Full Stack Development"} onChange={() => setDomain("Full Stack Development")} />
-                                 <div className="flex flex-col">
-                                   <p className={cn("text-xs font-bold uppercase tracking-widest transition-colors", formData.domain === "Full Stack Development" ? "text-indigo-600" : "text-slate-900")}>Full Stack</p>
-                                   <p className="text-[10px] text-slate-400 font-mono mt-2">Architecture & Integration</p>
-                                 </div>
-                               </label>
-                               <label className={cn(
-                                 "relative flex items-center p-8 transition-all cursor-pointer bg-white group",
-                                 formData.domain === "AI & ML Engineering" ? "bg-slate-50 shadow-inner" : "hover:bg-slate-50"
-                               )}>
-                                 <input type="radio" name="domain" value="AI & ML Engineering" className="sr-only" required checked={formData.domain === "AI & ML Engineering"} onChange={() => setDomain("AI & ML Engineering")} />
-                                 <div className="flex flex-col">
-                                   <p className={cn("text-xs font-bold uppercase tracking-widest transition-colors", formData.domain === "AI & ML Engineering" ? "text-cyan-600" : "text-slate-900")}>AI / ML</p>
-                                   <p className="text-[10px] text-slate-400 font-mono mt-2">Neural Logic Pipelines</p>
-                                 </div>
-                               </label>
-                            </div>
-                          </div>
-                          <button type="button" onClick={nextStep} disabled={!formData.domain} className="w-full py-5 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest disabled:opacity-30 flex items-center justify-center gap-3 transition-all hover:bg-black">
-                             Synchronize Tracks <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </motion.div>
-                      )}
-
-                      {currentStep === 2 && (
-                        <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                          <div className="space-y-12">
-                            <h4 className="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-widest">
-                              02. Personal Identifier
-                            </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Legal Full Name</label>
-                                <input required name="fullName" value={formData.fullName} onChange={handleInputChange} type="text" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="E.G. JULIAN ASKEY" />
-                              </div>
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Enterprise Email</label>
-                                <input required name="email" value={formData.email} onChange={handleInputChange} type="email" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="JULIAN@MAIL.COM" />
-                              </div>
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Mobile Contact</label>
-                                <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="+91 XXX XXX XXXX" />
-                              </div>
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Messaging Channel (WhatsApp)</label>
-                                <input required name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} type="tel" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="+91 XXX XXX XXXX" />
-                              </div>
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Referral Code (Optional)</label>
-                                <input name="referralCode" value={formData.referralCode} onChange={handleInputChange} type="text" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="ENTER CODE OR 'NA'" />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex gap-px bg-slate-100 pt-4">
-                            <button type="button" onClick={prevStep} className="px-10 py-5 bg-white border border-slate-100 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-50 transition-colors">Previous</button>
-                            <button type="button" onClick={nextStep} disabled={!formData.fullName || !formData.email || !formData.phone || !formData.whatsapp} className="flex-1 py-5 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-colors disabled:opacity-50">
-                               Validate Identity
-                            </button>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {currentStep === 3 && (
-                        <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                          <div className="space-y-12">
-                            <h4 className="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-widest">03. Academic Context</h4>
-                            <div className="space-y-10">
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Institution</label>
-                                <input required name="college" value={formData.college} onChange={handleInputChange} type="text" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="UNIVERSITY NAME" />
-                              </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <div className="space-y-3">
-                                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Program / Degree</label>
-                                  <input required name="degree" value={formData.degree} onChange={handleInputChange} type="text" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="FIELD OF STUDY" />
-                                </div>
-                                <div className="space-y-3">
-                                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Cohort Year</label>
-                                  <select name="year" value={formData.year} onChange={handleInputChange} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium bg-white">
-                                    <option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Graduate</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex gap-px bg-slate-100 pt-4">
-                            <button type="button" onClick={prevStep} className="px-10 py-5 bg-white border border-slate-100 text-[10px] font-bold uppercase tracking-widest">Previous</button>
-                            <button type="button" onClick={nextStep} disabled={!formData.college || !formData.degree} className="flex-1 py-5 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-colors">
-                               Process Academic Data
-                            </button>
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {currentStep === 4 && (
-                        <motion.div key="step4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8">
-                          <div className="space-y-12">
-                            <h4 className="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-widest">04. Technical Interest</h4>
-                            <div className="space-y-10">
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Technology Toolkit</label>
-                                <input name="skills" value={formData.skills} onChange={handleInputChange} type="text" spellCheck={false} className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-indigo-600 transition-all text-sm outline-none font-medium placeholder:text-slate-200" placeholder="E.G. PYTORCH, RUST, NEXT.JS" />
-                              </div>
-                              <div className="space-y-4">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Statement of Intent</label>
-                                <textarea name="reason" value={formData.reason} onChange={handleInputChange} rows={5} spellCheck={false} className="w-full p-8 bg-slate-50 border border-slate-100 focus:border-indigo-600 transition-all text-sm outline-none font-light leading-relaxed resize-none" placeholder="Elaborate on your technical roadmap and why you want to enter this specific engineering track."></textarea>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-4 p-8 bg-slate-50 border border-slate-100">
-                            <input type="checkbox" required className="mt-1 w-3 h-3 border-slate-300 text-indigo-600" />
-                            <p className="text-[8px] text-slate-400 font-bold uppercase tracking-[0.2em] leading-relaxed">I consent to the processing of this dataset and commit to the full 8-week accelerated pipeline cycle.</p>
-                          </div>
-                          <div className="flex gap-px bg-slate-100 pt-4">
-                            <button type="button" onClick={prevStep} className="px-10 py-5 bg-white border border-slate-100 text-[10px] font-bold uppercase tracking-widest">Previous</button>
-                            <button disabled={formStatus === "submitting"} className={cn("flex-1 py-5 text-white text-[10px] font-bold uppercase tracking-widest transition-all", formStatus === "submitting" ? "bg-slate-400" : "bg-indigo-600 hover:bg-indigo-700 shadow-xl shadow-indigo-500/20")}>
-                               {formStatus === "submitting" ? "Syncing Logic..." : "Commit Transaction"}
-                            </button>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </form>
+              <div className="p-12 text-center bg-slate-50 border border-slate-100 rounded-sm">
+                <div className="w-16 h-16 bg-rose-500/10 text-rose-600 flex items-center justify-center mx-auto mb-8 rounded-full">
+                  <Lock className="w-8 h-8" />
                 </div>
-              )}
+                <h3 className="text-2xl font-display font-medium text-slate-900 mb-4 tracking-tight">System Secured</h3>
+                <p className="text-slate-500 font-light leading-relaxed max-w-md mx-auto">
+                  We are currently processing the admitted batch. If you have any queries about an existing application or missed the deadline, contact our coordinate office directly.
+                </p>
+              </div>
             </div>
           </div>
         </div>
