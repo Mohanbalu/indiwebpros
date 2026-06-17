@@ -21,20 +21,20 @@ export function SplineSceneBasic() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex-1 relative z-10 flex flex-col justify-center text-center md:text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 w-fit mx-auto md:mx-0 bg-indigo-50 border border-indigo-100 rounded-full">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 w-fit mx-auto md:mx-0 bg-indigo-50/80 border border-indigo-100/80 rounded-full shadow-xs">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-            <span className="text-[10px] font-mono font-bold tracking-widest text-indigo-600 uppercase">System Ready</span>
+            <span className="text-[10px] font-mono font-extrabold tracking-wider text-indigo-750 uppercase">Trusted Technology Partner for Businesses & Startups</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 leading-[1.05] tracking-tight">
-            Major & Minor <br className="hidden md:block" /> 
+            Next-Gen Tech <br className="hidden md:block" /> 
             <span className="text-indigo-600">
-              Project Experts
+              Agency Solutions
             </span>
           </h1>
           
           <p className="mt-8 text-slate-500 text-lg md:text-xl max-w-lg mx-auto md:mx-0 leading-relaxed font-normal">
-            We bridge the gap between complex engineering and elegant design. High-performance websites, AI solutions, and specialized major/minor projects for students and businesses.
+            We engineer high-performance web applications, native mobile apps, custom AI agents, and frictionless business automations to scale your enterprise and accelerate growth.
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-5">
