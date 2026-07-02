@@ -33,7 +33,7 @@ const projects: CardStackItem[] = [
     description: "Centralized hub for academic resources, assignments, and peer collaboration.",
     imageSrc: "https://cdn.prod.website-files.com/67a3700c65457964cf349cd4/67b6faa4a98701dd6ba4ab22_Student%20Portal%40website-card.webp",
     tag: "Education",
-    href: "#",
+    href: "https://school.indiwebpros.in",
   },
   {
     id: 4,
