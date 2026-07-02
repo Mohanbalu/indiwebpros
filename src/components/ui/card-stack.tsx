@@ -271,7 +271,7 @@ export function CardStack<T extends CardStackItem>({
                     "absolute bottom-0 rounded-2xl border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl",
                     "will-change-transform select-none",
                     isActive
-                      ? "cursor-grab active:cursor-grabbing"
+                      ? (item.href && item.href !== "#" ? "cursor-pointer" : "cursor-grab active:cursor-grabbing")
                       : "cursor-pointer",
                   )}
                   style={{
@@ -309,7 +309,15 @@ export function CardStack<T extends CardStackItem>({
                   }}
                   // translateZ via style transform (kept stable w/ motion values above)
                   // We apply translateZ by using a CSS transform in a child wrapper.
-                  onClick={() => setActive(i)}
+                  onClick={(e) => {
+                    if (isActive) {
+                      if (item.href && item.href !== "#") {
+                        window.open(item.href, "_blank", "noopener,noreferrer");
+                      }
+                    } else {
+                      setActive(i);
+                    }
+                  }}
                   {...dragProps}
                 >
                   <div
@@ -361,14 +369,14 @@ export function CardStack<T extends CardStackItem>({
 
 function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full group/card">
       {/* image */}
       <div className="absolute inset-0">
         {item.imageSrc ? (
           <img
             src={item.imageSrc}
             alt={item.title}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
             draggable={false}
             loading="eager"
             referrerPolicy="no-referrer"
@@ -381,25 +389,45 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
       </div>
 
       {/* subtle gradient overlay at bottom for text readability */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
       {/* content */}
-      <div className="relative z-10 flex h-full flex-col justify-end p-5">
-        {item.tag && (
-          <div className="mb-2">
-            <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-indigo-600 text-white rounded-md">
-              {item.tag}
-            </span>
+      <div className="relative z-10 flex h-full flex-col justify-end p-6">
+        <div className="flex items-end justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            {item.tag && (
+              <div className="mb-2">
+                <span className="inline-block px-2.5 py-1 text-[9px] font-extrabold tracking-widest uppercase bg-indigo-600 text-white rounded-md shadow-sm">
+                  {item.tag}
+                </span>
+              </div>
+            )}
+            <h3 className="truncate text-xl font-bold text-white tracking-tight">
+              {item.title}
+            </h3>
+            {item.description ? (
+              <p className="mt-1.5 line-clamp-2 text-xs text-white/90 font-light leading-relaxed">
+                {item.description}
+              </p>
+            ) : null}
           </div>
-        )}
-        <div className="truncate text-lg font-semibold text-white">
-          {item.title}
+
+          {item.href && item.href !== "#" && (
+            <div className="shrink-0">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(item.href, "_blank", "noopener,noreferrer");
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-lg shadow-md hover:shadow-indigo-500/30 active:scale-95 transition-all duration-200 cursor-pointer border border-indigo-400/20"
+              >
+                <span>Live Demo</span>
+                <SquareArrowOutUpRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
         </div>
-        {item.description ? (
-          <div className="mt-1 line-clamp-2 text-sm text-white/80">
-            {item.description}
-          </div>
-        ) : null}
       </div>
     </div>
   );
