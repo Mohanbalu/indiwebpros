@@ -11,7 +11,7 @@ const projects: CardStackItem[] = [
     description: "A comprehensive educational portal for IIT aspirants, featuring course management and mock test modules.",
     imageSrc: "https://i.ibb.co/9kc06zxR/image.png",
     tag: "Featured",
-    href: "#",
+    href: "https://www.krishnaneetiit.com/",
   },
   {
     id: 1,
@@ -49,6 +49,33 @@ const projects: CardStackItem[] = [
     description: "Real-time monitoring and control for smart home devices and industrial sensors.",
     imageSrc: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80",
     href: "#",
+  },
+  {
+    id: 6,
+    title: "Clinic Website - Basic Package",
+    description: "Modern responsive clinic website with premium UI, service pages, doctor profiles, contact forms, WhatsApp integration, Google Maps, and SEO-ready structure.",
+    imageSrc: "https://i.ibb.co/wFM9VrJg/Screenshot-2026-07-03-150025.png",
+    tag: "Healthcare Website",
+    href: "https://multispeclinic.indiwebpros.in/",
+    ctaLabel: "View Demo",
+  },
+  {
+    id: 7,
+    title: "Clinic Website + Admin Dashboard",
+    description: "Clinic website with online appointment booking, admin dashboard, doctor management, department management, blog management, enquiry management, and analytics.",
+    imageSrc: "https://i.ibb.co/HTJDSKTn/care.jpg",
+    tag: "Healthcare Automation",
+    href: "https://carepoint.indiwebpros.in/",
+    ctaLabel: "View Demo",
+  },
+  {
+    id: 8,
+    title: "Complete Digital Clinic Platform",
+    description: "Complete clinic management platform including patient dashboard, doctor dashboard, appointment system, CRM, AI assistant, reports, prescriptions, analytics, and business automation.",
+    imageSrc: "https://i.ibb.co/TMZn6zhC/clinic.jpg",
+    tag: "Healthcare SaaS",
+    href: "https://clinic.indiwebpros.in/",
+    ctaLabel: "View Demo",
   },
 ];
 
