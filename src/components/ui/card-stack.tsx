@@ -388,6 +388,19 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
         )}
       </div>
 
+      {/* Live Demo Badge in top-right corner if the card is a live site */}
+      {item.href && item.href !== "#" && (
+        <div className="absolute top-4 right-4 z-20">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[8.5px] font-mono font-bold uppercase tracking-widest bg-emerald-500/90 hover:bg-emerald-500 text-white rounded-full backdrop-blur-xs border border-emerald-400/20 shadow-lg transition-colors duration-200">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+            </span>
+            Live Demo
+          </span>
+        </div>
+      )}
+
       {/* subtle gradient overlay at bottom for text readability */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
@@ -422,7 +435,7 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
                 }}
                 className="inline-flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-lg shadow-md hover:shadow-indigo-500/30 active:scale-95 transition-all duration-200 cursor-pointer border border-indigo-400/20"
               >
-                <span>Live Demo</span>
+                <span>{item.ctaLabel || "View Demo"}</span>
                 <SquareArrowOutUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
