@@ -16,10 +16,10 @@ export function Logo({ className, iconClassName }: LogoProps) {
       )}>
         {/* Brand Logo Image */}
         <img 
-          src="https://i.ibb.co/kVPBHqkN/Logo.png" 
+          src="https://i.ibb.co/RpYY1vn1/logo.jpg" 
           alt="Indiwebpros Logo" 
           referrerPolicy="no-referrer"
-          className="w-4/5 h-4/5 object-contain"
+          className="w-4/5 h-4/5 object-contain rounded-full"
         />
         
         {/* Ambient Light Effect */}
