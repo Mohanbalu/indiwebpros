@@ -100,8 +100,8 @@ export function Footer() {
           </div>
           <div className="flex gap-8">
             <a href="/sitemap.xml" className="text-slate-500 hover:text-white transition-colors text-xs">Sitemap</a>
-            <a href="#" className="text-slate-500 hover:text-white transition-colors text-xs">Privacy Policy</a>
-            <a href="#" className="text-slate-500 hover:text-white transition-colors text-xs">Terms of Service</a>
+            <Link to="/privacy" className="text-slate-500 hover:text-white transition-colors text-xs">Privacy Policy</Link>
+            <Link to="/terms" className="text-slate-500 hover:text-white transition-colors text-xs">Terms of Service</Link>
           </div>
         </div>
       </div>
