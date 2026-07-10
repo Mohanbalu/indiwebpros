@@ -21,16 +21,58 @@ import {
   AlertCircle
 } from "lucide-react";
 import { getLoggedInUser } from "../lib/lmsAuth";
-import { getCourses } from "../lib/lmsStore";
+import { getCourses, getReservations } from "../lib/lmsStore";
 
 // Import Reservation Modal
 import { ReservationModal } from "../components/ReservationModal";
+
+// Animated counter component for dynamic statistical values
+function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const end = value;
+    if (end <= 0) {
+      setCount(0);
+      return;
+    }
+    if (start === end) {
+      setCount(end);
+      return;
+    }
+
+    const duration = 1200; // 1.2 seconds animation
+    const steps = 60;
+    const stepTime = duration / steps;
+    const increment = Math.ceil(end / steps);
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <span>
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+}
 
 export function LmsLandingPage() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState("");
   const [courses, setCourses] = useState<any[]>([]);
+  const [reservations, setReservations] = useState<any[]>([]);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 22, minutes: 2, seconds: 22 });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -70,6 +112,13 @@ export function LmsLandingPage() {
       })
       .catch(err => console.error("Error fetching courses:", err));
 
+    // Fetch reservations directly for dynamic counters
+    getReservations()
+      .then(resList => {
+        setReservations(resList || []);
+      })
+      .catch(err => console.error("Error fetching reservations:", err));
+
     const user = getLoggedInUser();
     if (user) {
       setIsLoggedIn(true);
@@ -83,10 +132,10 @@ export function LmsLandingPage() {
   };
 
   const stats = [
-    { label: "Students Enrolled", value: "3,500+", icon: Users, color: "text-blue-500 bg-blue-50" },
-    { label: "Industry Courses", value: "10+", icon: BookOpen, color: "text-amber-500 bg-amber-50" },
-    { label: "Certificates Issued", value: "1,200+", icon: Award, color: "text-emerald-500 bg-emerald-50" },
-    { label: "Internship Openings", value: "150+", icon: Briefcase, color: "text-rose-500 bg-rose-50" }
+    { label: "Students Enrolled", numericValue: 347 + reservations.length, suffix: "+", icon: Users, color: "text-blue-500 bg-blue-50" },
+    { label: "Industry Courses", numericValue: Math.max(10, courses.length), suffix: "+", icon: BookOpen, color: "text-amber-500 bg-amber-50" },
+    { label: "Certificates Issued", numericValue: 98 + reservations.filter(r => r.status === "Approved").length, suffix: "+", icon: Award, color: "text-emerald-500 bg-emerald-50" },
+    { label: "Internship Openings", numericValue: 150 + reservations.length, suffix: "+", icon: Briefcase, color: "text-rose-500 bg-rose-50" }
   ];
 
   const testimonials = [
@@ -298,7 +347,9 @@ export function LmsLandingPage() {
                     <Icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">{s.value}</div>
+                    <div className="text-2xl md:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+                      <AnimatedCounter value={s.numericValue} suffix={s.suffix} />
+                    </div>
                     <div className="text-xs md:text-sm text-slate-500 font-medium">{s.label}</div>
                   </div>
                 </div>
