@@ -260,11 +260,9 @@ export function LmsStudentDashboard() {
 
             <div className="text-center space-y-2 border-t pt-5 border-slate-100">
               <p className="text-[10px] text-slate-400 leading-relaxed font-mono">
-                💡 Quick Demo Logins:
+                💡 Quick Demo Login:
                 <br />
                 Student: <span className="text-slate-700 font-bold">student@indiwebpros.in</span> (no password needed)
-                <br />
-                Admin: <span className="text-slate-700 font-bold">admin@indiwebpros.in</span> / pass: <span className="text-slate-700 font-bold">admin123</span>
               </p>
             </div>
           </form>
