@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import { Logo } from "./ui/Logo";
+import { saveToDatabase } from "../lib/database.ts";
 
 // --- Components ---
 
@@ -113,23 +114,26 @@ export function InternshipSection() {
     setFormStatus("submitting");
     
     try {
-      const apiUrl = "/api/internship-apply";
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(formData),
+      const result = await saveToDatabase({
+        Source: 'Internship Application',
+        Name: formData.full_name,
+        Email: formData.email,
+        Phone: formData.phone,
+        WhatsApp: formData.whatsapp,
+        College: formData.college,
+        Degree: formData.degree,
+        Year: formData.year,
+        Domain: formData.domain,
+        Skills: formData.skills,
+        Reason: formData.reason,
+        ReferralCode: formData.referral_code,
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (result.success) {
         setFormStatus("success");
       } else {
         setFormStatus("error");
-        setErrorMessage(result.error || result.message || "Unknown server error");
+        setErrorMessage(result.error || "Unknown server error");
       }
     } catch (err: any) {
       console.error("Submission error:", err);
