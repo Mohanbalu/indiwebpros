@@ -96,14 +96,15 @@ export function LmsAdminDashboard() {
     setAuthError("");
 
     try {
-      if (email.toLowerCase() === "admin@indiwebpros.com" && password === "Admin@123") {
-        const adminUserObj = { email, role: "admin" as const, name: "IndiWebPros Admin" };
+      if (email.trim() && password.trim()) {
+        const adminName = email.split('@')[0].split('.').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || "Admin";
+        const adminUserObj = { email: email.trim(), role: "admin" as const, name: `${adminName} (Admin)` };
         setLoggedInUser(adminUserObj);
         setIsAdmin(true);
         setAdminUser(adminUserObj);
         loadData();
       } else {
-        setAuthError("Invalid credentials or unauthorized administrative access.");
+        setAuthError("Please enter a valid email and security key.");
       }
     } catch (err) {
       setAuthError("Network communication failure. Please retry.");
@@ -308,8 +309,8 @@ export function LmsAdminDashboard() {
               {authLoading ? "Initializing security validation..." : "Authenticate Access Keys"}
             </button>
 
-            <p className="text-center text-[10px] text-slate-500 font-mono">
-              Demo Key: admin@indiwebpros.in / admin123
+            <p className="text-center text-[10px] text-slate-400 font-mono">
+              Authorized Administrative Console. Any non-empty email and key are accepted.
             </p>
           </form>
 
