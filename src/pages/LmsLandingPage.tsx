@@ -428,9 +428,6 @@ export function LmsLandingPage() {
                   <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100">
                     <div>⏱ {course.duration}</div>
                     <div className="text-right">📊 {course.difficulty}</div>
-                    <div className="col-span-2 text-slate-500 line-clamp-1 border-t border-slate-200/50 pt-1.5 mt-1.5">
-                      👤 {course.instructor}
-                    </div>
                   </div>
 
                   {/* Actions */}
