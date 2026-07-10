@@ -39,6 +39,7 @@ export function Navbar() {
   const navLinks = [
     { name: "Services", href: "/#services" },
     { name: "Internship", href: "/internship" },
+    { name: "LMS Academy", href: "/lms" },
     { name: "Portfolio", href: "/#portfolio" },
     { name: "Insights", href: "/#insights" },
     { name: "Pricing", href: "/#pricing" },
@@ -69,6 +70,12 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
+          <Link
+            to="/lms/dashboard"
+            className="px-4 py-2 border border-slate-200 text-slate-800 hover:bg-slate-50 text-sm font-bold rounded-xl transition-all active:scale-95 shadow-sm"
+          >
+            LMS Dashboard
+          </Link>
           <Link
             to="/#contact"
             className="px-5 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-all active:scale-95 shadow-sm"
