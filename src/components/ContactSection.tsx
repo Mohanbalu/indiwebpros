@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Mail, MapPin, CheckCircle2, Loader2 } from "lucide-react";
+import { saveToDatabase } from "../lib/database.ts";
 
 export function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -14,31 +15,26 @@ export function ContactSection() {
     
     const formData = new FormData(e.target as HTMLFormElement);
     const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
     };
 
     try {
-      const apiUrl = "/api/contact";
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(data),
+      const result = await saveToDatabase({
+        Source: 'Contact Form',
+        Name: data.name,
+        Email: data.email,
+        Message: data.message,
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (result.success) {
         setStatus('success');
         // Reset after 10 seconds if successful
         setTimeout(() => setStatus('idle'), 10000);
       } else {
         setStatus('error');
-        setErrorMessage(result.error || result.message || 'Server error occurred');
+        setErrorMessage(result.error || 'Server error occurred');
       }
     } catch (error: any) {
       console.error('Error submitting form:', error);
