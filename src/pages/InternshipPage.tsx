@@ -3,7 +3,7 @@ import { InternshipSection } from "../components/InternshipSection";
 
 export function InternshipPage() {
   return (
-    <div className="pt-20"> {/* Padding for fixed navbar */}
+    <div className="w-full min-h-screen bg-slate-950">
       <InternshipSection />
     </div>
   );
