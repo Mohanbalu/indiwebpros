@@ -1,4 +1,4 @@
-import { getSupabase } from "./supabase.ts";
+import { getSupabase } from "./supabase";
 
 export async function saveToDatabase(data: any) {
   try {
