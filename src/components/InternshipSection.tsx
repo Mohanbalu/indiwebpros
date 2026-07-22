@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { saveToDatabase } from "../lib/database";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   CheckCircle2, 
@@ -175,15 +176,52 @@ export function InternshipSection() {
         console.warn("Response was not valid JSON:", parseErr);
       }
 
-      if (response.ok || data.success) {
+      if (response.ok && data.success) {
         setFormSuccess(true);
       } else {
-        // Fallback to success to give positive confirmation
+        // Direct client-side Supabase save fallback in case API endpoint is unavailable on static host
+        try {
+          await saveToDatabase({
+            Date: new Date().toISOString(),
+            Source: 'Internship Application',
+            Name: formData.fullName || 'Anonymous',
+            Email: formData.email,
+            Phone: formData.phone || '',
+            WhatsApp: formData.whatsapp || formData.phone || '',
+            College: formData.college || '',
+            Degree: formData.degree || '',
+            Year: formData.yearOfStudy || '',
+            Domain: formData.course || formData.domain || '',
+            Skills: `${formData.internshipType || ''} | ${formData.skills || ''} | ${formData.branch || ''} | ${formData.city || ''}`,
+            Reason: formData.reason || '',
+            ReferralCode: 'BATCH-2'
+          });
+        } catch (dbErr) {
+          console.warn("Direct DB fallback note:", dbErr);
+        }
         setFormSuccess(true);
       }
     } catch (err: any) {
       console.error("Submission error:", err);
-      // Fallback: Show success even if network or server offline
+      try {
+        await saveToDatabase({
+          Date: new Date().toISOString(),
+          Source: 'Internship Application',
+          Name: formData.fullName || 'Anonymous',
+          Email: formData.email,
+          Phone: formData.phone || '',
+          WhatsApp: formData.whatsapp || formData.phone || '',
+          College: formData.college || '',
+          Degree: formData.degree || '',
+          Year: formData.yearOfStudy || '',
+          Domain: formData.course || formData.domain || '',
+          Skills: `${formData.internshipType || ''} | ${formData.skills || ''} | ${formData.branch || ''} | ${formData.city || ''}`,
+          Reason: formData.reason || '',
+          ReferralCode: 'BATCH-2'
+        });
+      } catch (dbErr) {
+        console.warn("Direct DB fallback error:", dbErr);
+      }
       setFormSuccess(true);
     } finally {
       setFormSubmitting(false);
