@@ -39,7 +39,7 @@ export function Navbar() {
   const navLinks = [
     { name: "Services", href: "/#services" },
     { name: "Internship", href: "/internship" },
-    { name: "LMS Academy", href: "/lms" },
+    { name: "LMS Academy", href: "http://courses.indiwebpros.in/", external: true },
     { name: "Portfolio", href: "/#portfolio" },
     { name: "Insights", href: "/#insights" },
     { name: "Pricing", href: "/#pricing" },
@@ -61,21 +61,31 @@ export function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            to="/lms/dashboard"
+          {navLinks.map((link) => 
+            link.external ? (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
+              >
+                {link.name}
+              </Link>
+            )
+          )}
+          <a
+            href="http://courses.indiwebpros.in/"
             className="px-4 py-2 border border-slate-200 text-slate-800 hover:bg-slate-50 text-sm font-bold rounded-xl transition-all active:scale-95 shadow-sm"
           >
             LMS Dashboard
-          </Link>
+          </a>
           <Link
             to="/#contact"
             className="px-5 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-all active:scale-95 shadow-sm"
@@ -127,13 +137,23 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + idx * 0.1 }}
                 >
-                  <Link
-                    to={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-3xl font-bold text-white/40 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-3xl font-bold text-white/40 hover:text-white transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-3xl font-bold text-white/40 hover:text-white transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
