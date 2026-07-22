@@ -3,6 +3,11 @@ import { getSupabase } from "./supabase";
 export async function saveToDatabase(data: any) {
   try {
     const supabase = getSupabase();
+    if (!supabase) {
+      console.warn("Supabase client unavailable - environment variables missing.");
+      return { success: false, error: "Supabase environment variables not configured on server." };
+    }
+
     if (data.Source === "Contact Form") {
       console.log("Saving Contact Form to Supabase...");
       const { error } = await supabase
