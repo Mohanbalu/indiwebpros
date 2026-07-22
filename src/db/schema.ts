@@ -41,6 +41,24 @@ export const internshipApplications = pgTable("internship_applications", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Internship Batch 2 table
+export const internshipbatch2 = pgTable("internshipbatch2", {
+  id: serial("id").primaryKey(),
+  fullName: text("full_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  whatsapp: text("whatsapp"),
+  college: text("college"),
+  degree: text("degree"),
+  year: text("year"),
+  domain: text("domain"),
+  skills: text("skills"),
+  reason: text("reason"),
+  referralCode: text("referral_code"),
+  source: text("source"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Courses table
 export const courses = pgTable("courses", {
   id: text("id").primaryKey(), // Course slug e.g. 'mern-stack-mastery'
