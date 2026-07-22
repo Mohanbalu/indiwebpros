@@ -6,34 +6,40 @@ export function getSupabase() {
   if (supabaseClient) return supabaseClient;
 
   try {
-    const metaEnv = (import.meta as any).env || {};
+    let metaEnv: Record<string, any> = {};
+    try {
+      if (typeof import.meta !== 'undefined' && (import.meta as any).env) {
+        metaEnv = (import.meta as any).env;
+      }
+    } catch {
+      // Ignore reference error if import.meta is not available in serverless CJS context
+    }
     
-    // Direct check of process.env for Node, and import.meta.env for bundle
-    let url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || metaEnv.VITE_SUPABASE_URL || '';
+    // Check process.env and metaEnv for Supabase credentials
+    let url = process.env.SUPABASE_URL || 
+              process.env.VITE_SUPABASE_URL || 
+              process.env.NEXT_PUBLIC_SUPABASE_URL || 
+              metaEnv.VITE_SUPABASE_URL || 
+              '';
+
     let key = process.env.SUPABASE_ANON_KEY || 
               process.env.VITE_SUPABASE_ANON_KEY || 
               process.env.SUPABASE_KEY || 
               process.env.VITE_SUPABASE_KEY || 
+              process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 
               metaEnv.VITE_SUPABASE_ANON_KEY || 
               '';
 
-    let supabaseUrl = String(url).trim();
-    let supabaseAnonKey = String(key).trim();
+    let supabaseUrl = String(url || '').trim();
+    let supabaseAnonKey = String(key || '').trim();
 
     // Aggressively remove any hidden non-ASCII characters
     supabaseUrl = supabaseUrl.replace(/[^\x21-\x7E]/g, '');
     supabaseAnonKey = supabaseAnonKey.replace(/[^\x21-\x7E]/g, '');
 
     if (!supabaseUrl || !supabaseAnonKey) {
-      const status = `URL=${supabaseUrl ? 'PRESENT' : 'MISSING'}, KEY=${supabaseAnonKey ? 'PRESENT' : 'MISSING'}`;
-      console.error(`Supabase Config Check: ${status}`);
-      
-      let hint = "Please ensure you have added both SUPABASE_URL and SUPABASE_ANON_KEY in the Settings > Environment Variables menu.";
-      if (supabaseUrl && !supabaseAnonKey) {
-        hint = "URL is detected, but KEY is missing. Did you name it SUPABASE_ANON_KEY?";
-      }
-      
-      throw new Error(`Supabase credentials missing (${status}). ${hint}`);
+      console.warn(`Supabase Config Warning: SUPABASE_URL or SUPABASE_ANON_KEY is not defined in environment variables.`);
+      return null;
     }
 
     if (!supabaseUrl.startsWith('http')) {
@@ -43,7 +49,8 @@ export function getSupabase() {
     supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
     return supabaseClient;
   } catch (err: any) {
-    console.error("Critical error in getSupabase:", err.message);
-    throw err;
+    console.error("Error initializing Supabase client:", err.message);
+    return null;
   }
 }
+
