@@ -512,6 +512,7 @@ export function LmsAdminDashboard() {
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-100 font-mono uppercase tracking-wider text-slate-500">
+                  <th className="p-4 font-bold w-12">#</th>
                   <th className="p-4 font-bold">Student Detail</th>
                   <th className="p-4 font-bold">Course / Plan</th>
                   <th className="p-4 font-bold">College / Discord</th>
@@ -522,8 +523,9 @@ export function LmsAdminDashboard() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredReservations.length > 0 ? (
-                  filteredReservations.map((res) => (
-                    <tr key={res.id} className="hover:bg-slate-50/50 transition-colors">
+                  filteredReservations.map((res, index) => (
+                    <tr key={res.id || index} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="p-4 font-mono font-bold text-slate-400">{index + 1}</td>
                       <td className="p-4">
                         <div className="font-bold text-slate-900">{res.name}</div>
                         <div className="text-[10px] text-slate-400 font-mono">{res.email}</div>
@@ -579,7 +581,7 @@ export function LmsAdminDashboard() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={6} className="p-8 text-center text-slate-400 font-mono">
+                    <td colSpan={7} className="p-8 text-center text-slate-400 font-mono">
                       No matching student registrations found.
                     </td>
                   </tr>
