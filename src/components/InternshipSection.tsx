@@ -48,7 +48,7 @@ export function InternshipSection() {
     branch: "Computer Science (CSE)",
     yearOfStudy: "3rd Year",
     city: "",
-    internshipType: "Guided Internship (₹299)",
+    internshipType: "Guided Internship",
     course: "Data Analytics",
     github: "",
     linkedin: "",
@@ -81,9 +81,9 @@ export function InternshipSection() {
       }
     } else if (courseName && !type) {
       if (["Data Analytics", "DevOps"].includes(courseName)) {
-        newType = "Guided Internship (₹299)";
+        newType = "Guided Internship";
       } else if (["Cyber Security", "Cloud Computing"].includes(courseName)) {
-        newType = "Self-Paced Internship (₹99)";
+        newType = "Self-Paced Internship";
       }
     } else if (type && courseName) {
       newType = type;
@@ -248,7 +248,7 @@ export function InternshipSection() {
       trackTag: "Guided Track",
       trackTagStyle: "bg-indigo-500/10 border-indigo-500/30 text-indigo-300",
       TagIcon: Sparkles,
-      defaultType: "Guided Internship (₹299)",
+      defaultType: "Guided Internship",
       badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-200",
       accent: "from-emerald-500 to-teal-600",
       description: "Master Data Visualization, SQL, Python Analytics, Pandas, and Business Intelligence dashboards."
@@ -260,7 +260,7 @@ export function InternshipSection() {
       trackTag: "Guided Track",
       trackTagStyle: "bg-indigo-500/10 border-indigo-500/30 text-indigo-300",
       TagIcon: Sparkles,
-      defaultType: "Guided Internship (₹299)",
+      defaultType: "Guided Internship",
       badgeColor: "bg-indigo-500/10 text-indigo-600 border-indigo-200",
       accent: "from-indigo-500 to-purple-600",
       description: "Learn Docker, Kubernetes, CI/CD Pipelines, Infrastructure as Code, and Cloud Deployment."
@@ -272,7 +272,7 @@ export function InternshipSection() {
       trackTag: "Self-Paced Track",
       trackTagStyle: "bg-amber-500/10 border-amber-500/30 text-amber-300",
       TagIcon: BookOpen,
-      defaultType: "Self-Paced Internship (₹99)",
+      defaultType: "Self-Paced Internship",
       badgeColor: "bg-rose-500/10 text-rose-600 border-rose-200",
       accent: "from-rose-500 to-pink-600",
       description: "Explore Ethical Hacking, Network Security, Vulnerability Assessment, and Defense Protocols."
@@ -284,7 +284,7 @@ export function InternshipSection() {
       trackTag: "Self-Paced Track",
       trackTagStyle: "bg-amber-500/10 border-amber-500/30 text-amber-300",
       TagIcon: BookOpen,
-      defaultType: "Self-Paced Internship (₹99)",
+      defaultType: "Self-Paced Internship",
       badgeColor: "bg-sky-500/10 text-sky-600 border-sky-200",
       accent: "from-sky-500 to-blue-600",
       description: "Architect Scalable Cloud Solutions using AWS, GCP Services, Serverless Functions, and Security."
@@ -512,12 +512,6 @@ export function InternshipSection() {
                   SELF-PACED INTERNSHIP
                 </h3>
 
-                <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-4xl md:text-5xl font-black text-amber-400">₹99</span>
-                  <span className="text-xl md:text-2xl font-bold text-slate-500 line-through decoration-rose-500/80">₹249</span>
-                  <span className="text-slate-400 text-sm">/ one-time enrollment</span>
-                </div>
-
                 <p className="text-slate-300 text-sm leading-relaxed mb-8 border-b border-slate-800 pb-6">
                   Perfect for students who want flexibility and prefer learning at their own pace.
                 </p>
@@ -540,7 +534,7 @@ export function InternshipSection() {
               </div>
 
               <button
-                onClick={() => scrollToForm("Self-Paced Internship (₹99)")}
+                onClick={() => scrollToForm("Self-Paced Internship")}
                 className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl text-xs uppercase tracking-wider transition-all border border-slate-700 active:scale-95 cursor-pointer"
               >
                 Register for Self-Paced
@@ -573,12 +567,6 @@ export function InternshipSection() {
                   GUIDED INTERNSHIP
                 </h3>
 
-                <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-4xl md:text-5xl font-black text-amber-400">₹299</span>
-                  <span className="text-xl md:text-2xl font-bold text-slate-500 line-through decoration-rose-500/80">₹499</span>
-                  <span className="text-slate-400 text-sm">/ one-time enrollment</span>
-                </div>
-
                 <p className="text-slate-300 text-sm leading-relaxed mb-8 border-b border-indigo-900/60 pb-6">
                   Ideal for students who want live classes, mentor guidance, and continuous support.
                 </p>
@@ -604,7 +592,7 @@ export function InternshipSection() {
               </div>
 
               <button
-                onClick={() => scrollToForm("Guided Internship (₹299)")}
+                onClick={() => scrollToForm("Guided Internship")}
                 className="w-full py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold rounded-2xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/40 active:scale-95 cursor-pointer"
               >
                 Register for Guided
@@ -764,7 +752,7 @@ export function InternshipSection() {
                         branch: "Computer Science (CSE)",
                         yearOfStudy: "3rd Year",
                         city: "",
-                        internshipType: "Guided Internship (₹499)",
+                        internshipType: "Guided Internship",
                         course: "Data Analytics",
                         github: "",
                         linkedin: "",
@@ -933,8 +921,8 @@ export function InternshipSection() {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-200 font-bold text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all cursor-pointer"
                     >
-                      <option value="Self-Paced Internship (₹99)">Self-Paced Internship (₹99)</option>
-                      <option value="Guided Internship (₹299)">Guided Internship (₹299)</option>
+                      <option value="Self-Paced Internship">Self-Paced Internship</option>
+                      <option value="Guided Internship">Guided Internship</option>
                     </select>
                   </div>
 
