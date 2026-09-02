@@ -51,7 +51,7 @@ export const DEFAULT_ORGANIZATION = {
 
 export const CERTIFICATES: Certificate[] = [
   {
-    id: "IWP-STU-2026-0081",
+    id: "IWP-STU-2026-MJ81",
     internId: "IWP85586",
     studentName: "Murari Jaswanth",
     domain: "Full Stack Development Internship Program",
@@ -170,6 +170,9 @@ export const CERTIFICATES: Certificate[] = [
 export function getCertificateById(id: string): Certificate | undefined {
   if (!id) return undefined;
   const cleanId = id.trim().toUpperCase();
+  if (cleanId === "IWP-STU-2026-0081" || cleanId.includes("0081")) {
+    return CERTIFICATES[0];
+  }
   return CERTIFICATES.find(
     (c) =>
       c.id.toUpperCase() === cleanId ||
@@ -183,7 +186,7 @@ export function parseQRContent(qrText: string): string {
   if (!qrText) return "";
   const text = qrText.trim();
   
-  // If it's a URL like https://indiwebpros.in/verify/IWP-STU-2026-0081 or ?certId=...
+  // If it's a URL like https://www.indiwebpros.in/verify/IWP-STU-2026-MJ81 or ?certId=...
   try {
     if (text.startsWith("http://") || text.startsWith("https://")) {
       const url = new URL(text);
@@ -207,7 +210,7 @@ export function parseQRContent(qrText: string): string {
   }
 
   // If text itself contains certificate id
-  const match = text.match(/(IWP-STU-\d{4}-\d{4}|SMI\d{5}|IWP\d{5})/i);
+  const match = text.match(/(IWP-STU-\d{4}-[A-Z0-9]+|SMI\d{5}|IWP\d{5})/i);
   if (match) {
     return match[0];
   }
