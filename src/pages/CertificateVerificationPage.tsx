@@ -8,7 +8,6 @@ import {
   Download,
   Share2,
   ExternalLink,
-  Award,
   Search,
   Camera,
   FileText,
@@ -22,7 +21,6 @@ import {
 } from "lucide-react";
 import { AccreditationBadges, TechSkillBadge } from "../components/certificate/AccreditationBadges";
 import { QrScannerModal } from "../components/certificate/QrScannerModal";
-import { CertificateDocument } from "../components/certificate/CertificateDocument";
 import { QrCodeView } from "../components/certificate/QrCodeView";
 import { getCertificateById, CERTIFICATES, DEFAULT_ORGANIZATION, Certificate } from "../lib/certificates";
 
@@ -34,12 +32,11 @@ export function CertificateVerificationPage() {
   // Query parameter support: ?id=... or ?certId=...
   const queryCertId = searchParams.get("id") || searchParams.get("certId") || searchParams.get("cert");
   
-  // Default to Jaswanth Murari (IWP-STU-2026-0081) if no specific ID provided
+  // Default to Murari Jaswanth (IWP-STU-2026-0081) if no specific ID provided
   const activeId = paramCertId || queryCertId || "IWP-STU-2026-0081";
 
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
-  const [showFullCertificate, setShowFullCertificate] = useState(false);
   const [searchInput, setSearchInput] = useState(activeId);
   const [copied, setCopied] = useState(false);
 
@@ -83,22 +80,13 @@ export function CertificateVerificationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#38bdf8] via-[#e0f2fe] to-[#7dd3fc] py-6 sm:py-12 px-3 sm:px-6 flex flex-col items-center justify-center font-sans">
       {/* Top Floating Control Bar */}
-      <div className="w-full max-w-xl mb-4 flex items-center justify-between gap-2 px-2">
+      <div className="w-full max-w-xl mb-4 flex items-center justify-start gap-2 px-2">
         <Link
           to="/"
           className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white/80 hover:bg-white backdrop-blur-md px-3 py-1.5 rounded-xl shadow-xs border border-white/60 transition-colors"
         >
           ← IndiWebPros Home
         </Link>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setScannerOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-sm transition-all active:scale-95"
-          >
-            <Camera className="w-3.5 h-3.5" />
-            Scan QR
-          </button>
-        </div>
       </div>
 
       {/* Main Verification Card (Matches Image 1 layout strictly) */}
@@ -210,13 +198,6 @@ export function CertificateVerificationPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-baseline">
-                <span className="font-bold text-slate-800 w-32 shrink-0">InternID:</span>
-                <span className="font-mono font-bold text-cyan-700">
-                  {certificate.internId || certificate.id}
-                </span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-baseline">
                 <span className="font-bold text-slate-800 w-32 shrink-0">Certificate ID:</span>
                 <span className="font-mono text-slate-700 font-semibold">{certificate.id}</span>
               </div>
@@ -295,15 +276,7 @@ export function CertificateVerificationPage() {
 
         {/* Action Buttons */}
         {certificate && (
-          <div className="w-full space-y-2.5 mt-5">
-            <button
-              onClick={() => setShowFullCertificate(!showFullCertificate)}
-              className="w-full py-3 px-4 bg-gradient-to-r from-[#0A192F] to-[#1E3A8A] hover:from-[#071324] hover:to-[#172e6f] text-white text-xs sm:text-sm font-bold rounded-xl shadow-md transition-all active:scale-[0.99] flex items-center justify-center gap-2"
-            >
-              <Award className="w-4 h-4 text-amber-300" />
-              {showFullCertificate ? "Hide Certificate Preview" : "View Full Official Certificate (2nd Image)"}
-            </button>
-
+          <div className="w-full mt-4">
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={handleCopyLink}
@@ -320,22 +293,6 @@ export function CertificateVerificationPage() {
                 <Camera className="w-3.5 h-3.5 text-cyan-600" />
                 Scan Another QR
               </button>
-            </div>
-          </div>
-        )}
-
-        {/* Full Certificate Modal / Expandable View */}
-        {showFullCertificate && certificate && (
-          <div className="w-full mt-6 pt-6 border-t border-slate-200 animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between mb-3 px-1">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-amber-500" />
-                Official Certificate Document
-              </h3>
-              <span className="text-[11px] text-slate-500 font-mono">Ready to Print & Export</span>
-            </div>
-            <div className="overflow-x-auto p-1 bg-slate-100 rounded-2xl">
-              <CertificateDocument certificate={certificate} />
             </div>
           </div>
         )}
