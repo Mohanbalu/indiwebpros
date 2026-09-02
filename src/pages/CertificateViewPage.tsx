@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { CertificateDocument } from "../components/certificate/CertificateDocument";
-import { getCertificateById } from "../data/certificates";
+import { getCertificateById } from "../lib/certificates";
 import { ArrowLeft, CheckCircle, ShieldCheck } from "lucide-react";
 
 export function CertificateViewPage() {
