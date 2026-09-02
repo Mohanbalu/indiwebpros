@@ -5,15 +5,10 @@ import {
   CheckCircle,
   ShieldCheck,
   QrCode,
-  Download,
   Share2,
-  ExternalLink,
-  Search,
   Camera,
-  FileText,
   Copy,
   Check,
-  ArrowRight,
   Info,
   Calendar,
   Layers,
@@ -22,11 +17,11 @@ import {
 import { AccreditationBadges, TechSkillBadge } from "../components/certificate/AccreditationBadges";
 import { QrScannerModal } from "../components/certificate/QrScannerModal";
 import { QrCodeView } from "../components/certificate/QrCodeView";
-import { getCertificateById, CERTIFICATES, DEFAULT_ORGANIZATION, Certificate } from "../lib/certificates";
+import { getCertificateById, DEFAULT_ORGANIZATION, Certificate } from "../lib/certificates";
 
 export function CertificateVerificationPage() {
   const { certId: paramCertId } = useParams<{ certId?: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // Query parameter support: ?id=... or ?certId=...
@@ -37,14 +32,12 @@ export function CertificateVerificationPage() {
 
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState(activeId);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const found = getCertificateById(activeId);
     if (found) {
       setCertificate(found);
-      setSearchInput(found.id);
 
       // Trigger celebratory confetti burst
       try {
@@ -60,13 +53,6 @@ export function CertificateVerificationPage() {
   const handleScanSuccess = (scannedId: string) => {
     setScannerOpen(false);
     navigate(`/verify/${encodeURIComponent(scannedId)}`);
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchInput.trim()) {
-      navigate(`/verify/${encodeURIComponent(searchInput.trim())}`);
-    }
   };
 
   const handleCopyLink = () => {
@@ -117,8 +103,6 @@ export function CertificateVerificationPage() {
             {certificate?.organization.subtitle || DEFAULT_ORGANIZATION.subtitle}
           </p>
           <div className="text-[9px] sm:text-[10px] font-mono text-slate-500 leading-tight flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-            <span>CIN: {certificate?.organization.cin || DEFAULT_ORGANIZATION.cin}</span>
-            <span>|</span>
             <span>MSME: {certificate?.organization.msme || DEFAULT_ORGANIZATION.msme}</span>
             <span>|</span>
             <span>{certificate?.organization.iso || DEFAULT_ORGANIZATION.iso}</span>
@@ -277,68 +261,15 @@ export function CertificateVerificationPage() {
         {/* Action Buttons */}
         {certificate && (
           <div className="w-full mt-4">
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={handleCopyLink}
-                className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? "Link Copied!" : "Copy Verify Link"}
-              </button>
-
-              <button
-                onClick={() => setScannerOpen(true)}
-                className="py-2.5 px-3 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-200 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5"
-              >
-                <Camera className="w-3.5 h-3.5 text-cyan-600" />
-                Scan Another QR
-              </button>
-            </div>
+            <button
+              onClick={handleCopyLink}
+              className="w-full py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? "Link Copied!" : "Copy Verification Link"}
+            </button>
           </div>
         )}
-
-        {/* Search Another Certificate Section */}
-        <div className="w-full mt-6 pt-5 border-t border-slate-100">
-          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-            Verify Another Certificate
-          </p>
-          <form onSubmit={handleSearchSubmit} className="flex gap-2">
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Enter Certificate ID (e.g. IWP-STU-2026-0081)"
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0"
-            >
-              Verify
-            </button>
-          </form>
-
-          {/* Quick links to sample certificates */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 mt-3">
-            <span className="text-[10px] text-slate-400">Quick tests:</span>
-            {CERTIFICATES.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => navigate(`/verify/${c.id}`)}
-                className={`text-[10px] px-2 py-0.5 rounded-md font-mono transition-colors ${
-                  activeId === c.id
-                    ? "bg-cyan-600 text-white font-bold"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-                }`}
-              >
-                {c.studentName.split(" ")[0]} ({c.id})
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Footer (Strictly matching Image 1) */}
         <div className="w-full mt-8 pt-4 border-t border-slate-100 text-center select-none">
