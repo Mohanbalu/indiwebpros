@@ -24,8 +24,7 @@ import { AccreditationBadges, TechSkillBadge } from "../components/certificate/A
 import { QrScannerModal } from "../components/certificate/QrScannerModal";
 import { CertificateDocument } from "../components/certificate/CertificateDocument";
 import { QrCodeView } from "../components/certificate/QrCodeView";
-import { getCertificateById, CERTIFICATES, DEFAULT_ORGANIZATION } from "../data/certificates";
-import { Certificate } from "../types/certificate";
+import { getCertificateById, CERTIFICATES, DEFAULT_ORGANIZATION, Certificate } from "../lib/certificates";
 
 export function CertificateVerificationPage() {
   const { certId: paramCertId } = useParams<{ certId?: string }>();
