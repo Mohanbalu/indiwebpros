@@ -39,11 +39,11 @@ export interface Certificate {
 
 export const DEFAULT_ORGANIZATION = {
   name: "IndiWebPros",
-  fullName: "IndiWebPros (OPC) Pvt Ltd",
+  fullName: "IndiWebPros",
   tagline: "BUILDING DIGITAL SUCCESS FOR YOUR BUSINESS",
   subtitle: "Virtual Training + Project-Based Internship Program",
-  cin: "U62099TS2024OPC187033",
-  msme: "UDYAM-TS-03-0039472",
+  cin: "",
+  msme: "UDYAM-AP-20-0100562",
   iso: "ISO 9001:2015 Certificate Reg.No: MSC0724143",
   website: "https://indiwebpros.in",
   email: "contact@indiwebpros.in"
