@@ -6,7 +6,7 @@ import { ArrowLeft, CheckCircle, ShieldCheck } from "lucide-react";
 
 export function CertificateViewPage() {
   const { certId } = useParams<{ certId?: string }>();
-  const certificate = getCertificateById(certId || "IWP-STU-2026-0081");
+  const certificate = getCertificateById(certId || "IWP-STU-2026-MJ81");
 
   if (!certificate) {
     return (
