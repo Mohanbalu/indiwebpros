@@ -53,7 +53,7 @@ export const CERTIFICATES: Certificate[] = [
   {
     id: "IWP-STU-2026-0081",
     internId: "IWP85586",
-    studentName: "Jaswanth Murari",
+    studentName: "Murari Jaswanth",
     domain: "Full Stack Development Internship Program",
     shortDomain: "Full Stack Web Development Internship",
     duration: "8 WEEKS",
