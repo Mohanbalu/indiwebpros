@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link, useNavigate } from "react-router-dom";
-import confetti from "canvas-confetti";
+import { triggerConfetti } from "../lib/confetti";
 import {
   CheckCircle,
   ShieldCheck,
@@ -52,12 +52,7 @@ export function CertificateVerificationPage() {
 
       // Trigger celebratory confetti burst
       try {
-        confetti({
-          particleCount: 50,
-          spread: 60,
-          origin: { y: 0.6 },
-          colors: ["#0284c7", "#06b6d4", "#10b981", "#6366f1"],
-        });
+        triggerConfetti();
       } catch {
         // ignore in non-browser env
       }
