@@ -20,15 +20,20 @@ import { LmsStudentDashboard } from "./pages/LmsStudentDashboard";
 import { LmsCoursePlayer } from "./pages/LmsCoursePlayer";
 import { LmsAdminDashboard } from "./pages/LmsAdminDashboard";
 
+// Certificate Verification Pages
+import { CertificateVerificationPage } from "./pages/CertificateVerificationPage";
+import { CertificateViewPage } from "./pages/CertificateViewPage";
+
 function MainAppLayout() {
   const location = useLocation();
   const isPlayer = location.pathname.startsWith("/lms/player");
   const isAdmin = location.pathname.startsWith("/lms/admin");
+  const isVerify = location.pathname.startsWith("/verify") || location.pathname.startsWith("/certificate");
 
   return (
     <div className="min-h-screen bg-white selection:bg-indigo-100 flex flex-col justify-between">
       <ScrollToTop />
-      {!isPlayer && !isAdmin && <Navbar />}
+      {!isPlayer && !isAdmin && !isVerify && <Navbar />}
       
       <main className="flex-grow">
         <Routes>
@@ -36,6 +41,11 @@ function MainAppLayout() {
           <Route path="/internship" element={<InternshipPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+
+          {/* Certificate Verification Routes (Direct QR scan target) */}
+          <Route path="/verify" element={<CertificateVerificationPage />} />
+          <Route path="/verify/:certId" element={<CertificateVerificationPage />} />
+          <Route path="/certificate/:certId" element={<CertificateViewPage />} />
           
           {/* LMS Routes */}
           <Route path="/lms" element={<LmsLandingPage />} />
@@ -47,7 +57,7 @@ function MainAppLayout() {
         </Routes>
       </main>
 
-      {!isPlayer && !isAdmin && <Footer />}
+      {!isPlayer && !isAdmin && !isVerify && <Footer />}
     </div>
   );
 }
