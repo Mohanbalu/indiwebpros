@@ -27,8 +27,8 @@ export function CertificateVerificationPage() {
   // Query parameter support: ?id=... or ?certId=...
   const queryCertId = searchParams.get("id") || searchParams.get("certId") || searchParams.get("cert");
   
-  // Default to Murari Jaswanth (IWP-STU-2026-0081) if no specific ID provided
-  const activeId = paramCertId || queryCertId || "IWP-STU-2026-0081";
+  // Default to Murari Jaswanth (IWP-STU-2026-MJ81) if no specific ID provided
+  const activeId = paramCertId || queryCertId || "IWP-STU-2026-MJ81";
 
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [scannerOpen, setScannerOpen] = useState(false);
@@ -57,7 +57,8 @@ export function CertificateVerificationPage() {
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
+      const verifyUrl = `https://www.indiwebpros.in/verify/${certificate?.id || "IWP-STU-2026-MJ81"}`;
+      navigator.clipboard.writeText(verifyUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
