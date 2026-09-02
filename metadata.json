@@ -1,5 +1,10 @@
 {
-  "name": "IndiWebPros | Major & Minor Projects & Web Solutions",
-  "description": "IndiWebPros offers expert guidance for major and minor projects, professional web development, and AI solutions for businesses and students.",
-  "requestFramePermissions": []
+  "name": "IndiWebPros | Certificate Verification & Solutions",
+  "description": "IndiWebPros official certificate verification portal, internship programs, and digital web solutions.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
