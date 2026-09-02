@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { X, Camera, Upload, AlertCircle, RefreshCw, CheckCircle2, Sparkles } from "lucide-react";
 import jsQR from "jsqr";
-import { parseQRContent, CERTIFICATES } from "../../data/certificates";
+import { parseQRContent, CERTIFICATES } from "../../lib/certificates";
 
 interface QrScannerModalProps {
   isOpen: boolean;
