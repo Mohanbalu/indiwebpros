@@ -39,6 +39,7 @@ export function Navbar() {
   const navLinks = [
     { name: "Services", href: "/#services" },
     { name: "Internship", href: "/internship" },
+    { name: "Verify Certificate", href: "/verify" },
     { name: "LMS Academy", href: "http://courses.indiwebpros.in/", external: true },
     { name: "Portfolio", href: "/#portfolio" },
     { name: "Insights", href: "/#insights" },
