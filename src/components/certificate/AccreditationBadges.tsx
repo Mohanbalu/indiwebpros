@@ -11,52 +11,37 @@ export function AccreditationBadges({ className = "" }: { className?: string }) 
         </span>
       </div>
 
-      {/* APSCHE / State Council */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-red-50/80 border border-red-200/80 rounded-md">
-        <svg className="w-4 h-4 text-red-700 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L2 7l10 5 10-5-10-5zm0 8.2L4.5 7 12 3.3 19.5 7 12 10.2zM2 17l10 5 10-5v-3l-10 5-10-5v3z" />
-        </svg>
-        <span className="text-[10px] sm:text-[11px] font-bold text-red-900 tracking-wider">APSCHE</span>
-      </div>
-
-      {/* Govt / Ministry */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-50 border border-slate-200 rounded-md">
-        <svg className="w-4 h-4 text-slate-700 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-        </svg>
-        <span className="text-[10px] sm:text-[11px] font-semibold text-slate-700 leading-tight">Govt. of India</span>
-      </div>
-
       {/* AICTE */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-orange-50 border border-orange-200 rounded-md">
-        <div className="w-4 h-4 rounded-full border border-orange-600 flex items-center justify-center bg-orange-500 text-[8px] font-black text-white">
-          ⚙
-        </div>
-        <span className="text-[10px] sm:text-[11px] font-extrabold text-orange-800">AICTE</span>
-      </div>
-
-      {/* IndiWebPros Logo */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-indigo-50 border border-indigo-200 rounded-md">
-        <div className="w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[9px] font-black">
-          🌲
-        </div>
-        <span className="text-[10px] sm:text-[11px] font-bold text-indigo-950">IndiWebPros</span>
+      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-orange-50 border border-orange-200 rounded-md">
+        <img
+          src="https://i.ibb.co/202zbbyc/aicte.png"
+          alt="AICTE"
+          className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0 drop-shadow-xs"
+          referrerPolicy="no-referrer"
+        />
+        <span className="text-[11px] sm:text-[12px] font-extrabold text-orange-900 whitespace-nowrap">AICTE</span>
       </div>
 
       {/* ISO 9001:2015 */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-blue-50 border border-blue-200 rounded-md">
-        <div className="w-4 h-4 rounded-full border border-blue-600 flex items-center justify-center text-blue-700 font-bold text-[8px]">
-          ISO
-        </div>
-        <span className="text-[10px] sm:text-[11px] font-bold text-blue-900">ISO 9001:2015</span>
+      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-200 rounded-md">
+        <img
+          src="https://i.ibb.co/4BtJNxc/iso.png"
+          alt="ISO 9001:2015"
+          className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0 drop-shadow-xs"
+          referrerPolicy="no-referrer"
+        />
+        <span className="text-[11px] sm:text-[12px] font-bold text-blue-900 whitespace-nowrap">ISO 9001:2015</span>
       </div>
 
       {/* MSME */}
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-emerald-50 border border-emerald-200 rounded-md">
-        <div className="w-3.5 h-3.5 rounded bg-emerald-700 text-[8px] font-bold text-white flex items-center justify-center">
-          M
-        </div>
-        <span className="text-[10px] sm:text-[11px] font-black tracking-tight text-emerald-950">MSME</span>
+      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-md">
+        <img
+          src="https://i.ibb.co/xt1C6xxh/msme.png"
+          alt="MSME"
+          className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0 drop-shadow-xs"
+          referrerPolicy="no-referrer"
+        />
+        <span className="text-[11px] sm:text-[12px] font-black tracking-tight text-emerald-950 whitespace-nowrap">MSME</span>
       </div>
 
       {/* AWS Startups */}
