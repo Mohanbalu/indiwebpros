@@ -28,7 +28,7 @@ function MainAppLayout() {
   const location = useLocation();
   const isPlayer = location.pathname.startsWith("/lms/player");
   const isAdmin = location.pathname.startsWith("/lms/admin");
-  const isVerify = location.pathname.startsWith("/verify") || location.pathname.startsWith("/certificate");
+  const isVerify = location.pathname === "/" || location.pathname.startsWith("/verify") || location.pathname.startsWith("/certificate");
 
   return (
     <div className="min-h-screen bg-white selection:bg-indigo-100 flex flex-col justify-between">
@@ -37,7 +37,9 @@ function MainAppLayout() {
       
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          {/* Certificate Verification as Primary / Default Root Entry */}
+          <Route path="/" element={<CertificateVerificationPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/internship" element={<InternshipPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
