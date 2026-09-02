@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Certificate } from "../../types/certificate";
+import { Certificate } from "../../lib/certificates";
 import { TechSkillBadge } from "./AccreditationBadges";
 import { QrCodeView } from "./QrCodeView";
 import { Printer, Download, Share2, CheckCircle2, ShieldCheck } from "lucide-react";
