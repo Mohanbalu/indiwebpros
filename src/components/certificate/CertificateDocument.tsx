@@ -17,10 +17,7 @@ export function CertificateDocument({
 }: CertificateDocumentProps) {
   const printRef = useRef<HTMLDivElement>(null);
   const fullVerificationUrl =
-    verificationUrl ||
-    (typeof window !== "undefined"
-      ? `${window.location.origin}/verify/${certificate.id}`
-      : `https://indiwebpros.in/verify/${certificate.id}`);
+    verificationUrl || `https://www.indiwebpros.in/verify/${certificate.id}`;
 
   const handlePrint = () => {
     window.print();
