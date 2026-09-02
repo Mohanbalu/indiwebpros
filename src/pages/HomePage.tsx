@@ -7,6 +7,7 @@ import { InsightsSection } from "../components/InsightsSection";
 import { PricingSection } from "../components/PricingSection";
 import { ClientsSectionDemo } from "../components/ClientsSectionDemo";
 import { ContactSection } from "../components/ContactSection";
+import { CertificateVerificationBanner } from "../components/certificate/CertificateVerificationBanner";
 
 export function HomePage() {
   return (
@@ -17,6 +18,9 @@ export function HomePage() {
           <SplineSceneBasic />
         </div>
       </section>
+
+      {/* Certificate Verification Banner */}
+      <CertificateVerificationBanner />
 
       {/* Trusted By Section (Social Proof) */}
       <section className="w-full py-16 bg-white border-y border-slate-100 overflow-hidden">
